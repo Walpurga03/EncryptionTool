@@ -1,0 +1,13 @@
+{
+  "options": [
+      "Caesar Cipher",
+      "Vigenere Ciphers",
+      "XOR",
+      "Blowfish",
+      "RIPEMD-160",
+      "SHA-256",
+      "AES",
+      "RSA",
+      "Beenden"
+  ]
+}
