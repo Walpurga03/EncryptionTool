@@ -13,6 +13,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Debugging Git
+      run: |
+        git --version
+        git config --list
+        git status
+
     - name: Set up Rust
       uses: actions-rs/toolchain@v1
       with:
