@@ -1,0 +1,11 @@
+{
+  "name": "encryption-tool",
+  "version": "1.0.0",
+  "description": "A web-based encryption tool using Rust and WebAssembly",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'Building static site' && mkdir -p static && cp -r src/* static/"
+  },
+  "author": "Walpurba03",
+  "license": "MIT"
+}
