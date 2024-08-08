@@ -1,7 +1,7 @@
 {
   "options": [
-      "Caesar Cipher",
-      "Vigenere Ciphers",
+      "Caesar",
+      "Vigenere",
       "XOR",
       "Blowfish",
       "RIPEMD-160",
