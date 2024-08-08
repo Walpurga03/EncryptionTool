@@ -31,29 +31,29 @@ fn run_console_app() {
     let text = Arc::new(Mutex::new(String::new()));
     {
         let mut text_lock = text.lock().unwrap();
-        println!("Bitte geben Sie den zu verschlüsselnden Text ein:");
+        println!("Please enter the text to be encrypted:");
         stdin().read_line(&mut text_lock).unwrap();
         *text_lock = text_lock.trim().to_string();
     }
 
     let mut methods: HashMap<&str, fn(Arc<Mutex<String>>)> = HashMap::new();
     methods.insert("Caesar", encryption::caesar::caesar_console_wrapper);
-    methods.insert("Vigenere", encryption::vigenere::vigenere);
+    methods.insert("Vigenere", encryption::vigenere::vigenere_console_wrapper);
+    methods.insert("XOR", encryption::xor::xor_console_wrapper);
+    methods.insert("Blowfish", encryption::blowfish::blowfish);
     methods.insert("SHA-256", encryption::sha256::sha256);
-    methods.insert("XOR", encryption::xor::xor);
     methods.insert("AES", encryption::aes::aes);
     methods.insert("RSA", encryption::rsa::rsa);
-    methods.insert("Blowfish", encryption::blowfish::blowfish);
     methods.insert("RIPEMD-160", encryption::ripemd160::ripemd160);
 
     loop {
-        println!("Bitte wählen Sie eine Option:");
+        println!("Please choose an option:");
 
         for (i, option) in options.iter().enumerate() {
             println!("{}. {}", i + 1, option);
         }
 
-        print!("Ihre Wahl: ");
+        print!("Your choice: ");
         stdout().flush().unwrap();
 
         let mut choice = String::new();
@@ -61,7 +61,7 @@ fn run_console_app() {
         let choice: usize = match choice.trim().parse() {
             Ok(num) => num,
             Err(_) => {
-                println!("Ungültige Eingabe, bitte eine Zahl eingeben.");
+                println!("Invalid input, please enter a number.");
                 continue;
             }
         };

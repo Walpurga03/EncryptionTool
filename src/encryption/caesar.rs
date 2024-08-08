@@ -38,6 +38,24 @@ pub fn run_console_version() {
 
 pub fn caesar_console_wrapper(text: Arc<Mutex<String>>) {
     let text_lock = text.lock().unwrap().clone();
-    let encrypted_text = caesar_cipher(&text_lock, 3);
-    println!("Encrypted text: {}", encrypted_text);
+
+    let mut shift_input = String::new();
+    print!("Enter shift amount: ");
+    io::stdout().flush().unwrap();
+
+    let shift: i32;
+    loop {
+        io::stdin().read_line(&mut shift_input).unwrap();
+        shift = match shift_input.trim().parse() {
+            Ok(num) if num >= 1 && num <= 25 => num,
+            _ => {
+                println!("A valid shift value between 1 and 25:");
+                shift_input.clear(); // Clear the input for the next attempt
+                continue;
+            }
+        };
+        let encrypted_text = caesar_cipher(&text_lock, shift);
+        println!("\"{}\" -> \"Caesar\"({}) = \"{}\"", text_lock, shift, encrypted_text);
+        break;
+    }
 }

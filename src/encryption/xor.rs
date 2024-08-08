@@ -1,18 +1,46 @@
+use std::io::{self, Write};
 use std::sync::{Arc, Mutex};
+use wasm_bindgen::prelude::*;
 
-pub fn xor(text: Arc<Mutex<String>>) {
-    let text = text.lock().unwrap();
-    println!("xor ausgewählt.");
-    println!("Originaltext: {}", *text);
-    // Implementiere die xor Logik hier
-    // Beispiel: Verschiebe jeden Buchstaben um 3 Positionen
-    let encrypted: String = text.chars().map(|c| {
-        if c.is_ascii_alphabetic() {
-            let first = if c.is_ascii_lowercase() { b'a' } else { b'A' };
-            (first + (c as u8 - first + 3) % 26) as char
-        } else {
-            c
-        }
-    }).collect();
-    println!("Verschlüsselter Text: {}", encrypted);
+#[wasm_bindgen]
+pub fn xor_cipher(text: &str, key: &str) -> Vec<u8> {
+    let key = key.as_bytes();
+    text.bytes()
+        .enumerate()
+        .map(|(i, b)| b ^ key[i % key.len()])
+        .collect()
+}
+
+pub fn run_console_version() {
+    let mut text = String::new();
+    let mut key = String::new();
+
+    print!("Enter text to encrypt: ");
+    io::stdout().flush().unwrap();
+    io::stdin().read_line(&mut text).unwrap();
+    let text = text.trim();
+
+    print!("Enter key: ");
+    io::stdout().flush().unwrap();
+    io::stdin().read_line(&mut key).unwrap();
+    let key = key.trim();
+
+    let encrypted_text = xor_cipher(text, key);
+    let encrypted_hex: String = encrypted_text.iter().map(|b| format!("{:02x}", b)).collect();
+    println!("Encrypted text (hex): {}", encrypted_hex);
+}
+
+pub fn xor_console_wrapper(text: Arc<Mutex<String>>) {
+    let text_lock = text.lock().unwrap().clone();
+
+    let mut key_input = String::new();
+    print!("Enter key: ");
+    io::stdout().flush().unwrap();
+
+    io::stdin().read_line(&mut key_input).unwrap();
+    let key = key_input.trim();
+
+    let encrypted_text = xor_cipher(&text_lock, key);
+    let encrypted_hex: String = encrypted_text.iter().map(|b| format!("{:02x}", b)).collect();
+    println!("\"{}\" -> \"XOR\"({}) = \"{}\"", text_lock, key, encrypted_hex);
 }
