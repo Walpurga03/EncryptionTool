@@ -13,6 +13,19 @@
             <div id="textContainer">
                 <span id="cursor">█</span> <!-- Breiter Cursor -->
                 <span id="matrixText"></span>
+                <div id="menu" style="display: none;">
+                    <h3>Encryption-Tool:</h3>
+                    <ul>
+                        <li onclick="selectMethod('Caesar Cipher')">Caesar Cipher</li>
+                        <li onclick="selectMethod('Vigenère Cipher')">Vigenère Cipher</li>
+                        <li onclick="selectMethod('XOR')">XOR</li>
+                        <li onclick="selectMethod('Blowfish')">Blowfish</li>
+                        <li onclick="selectMethod('SHA-256')">SHA-256</li>
+                        <li onclick="selectMethod('RIPEMD-160')">RIPEMD-160</li>
+                        <li onclick="selectMethod('AES')">AES</li>
+                        <li onclick="selectMethod('RSA')">RSA</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
