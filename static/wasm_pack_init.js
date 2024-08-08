@@ -89,13 +89,21 @@ function startRustProgram() {
     matrixText.textContent = '';
     cursor.style.display = 'none';
 
-    // Zeige den Text zum Starten des eigentlichen Programms
-    matrixText.textContent = 'Encryptet Text:';
+    // Zeige das Menü
+    const menu = document.getElementById('menu');
+    menu.style.display = 'block';
+}
 
-    // Jetzt kann der Benutzer den Text eingeben und das Rust-Programm übernimmt
-    const inputField = document.getElementById('inputField');
-    inputField.style.display = 'inline-block';
-    inputField.focus();
+function selectMethod(method) {
+    const matrixText = document.getElementById('matrixText');
+    const menu = document.getElementById('menu');
+    
+    // Verstecke das Menü und zeige die ausgewählte Methode an
+    menu.style.display = 'none';
+    matrixText.textContent = `Ausgewählte Methode: ${method}`;
+
+    // Hier könntest du den nächsten Schritt basierend auf der ausgewählten Methode einleiten
+    // z.B. eine Eingabeaufforderung anzeigen oder direkt die Verschlüsselung starten
 }
 
 setTimeout(blinkCursor, 500); // Startet den Blinkeffekt
