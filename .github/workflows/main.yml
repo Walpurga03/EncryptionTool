@@ -13,12 +13,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Debugging Git
-      run: |
-        git --version
-        git config --list
-        git status
-
     - name: Set up Rust
       uses: actions-rs/toolchain@v1
       with:
@@ -46,5 +40,5 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         publish_dir: ./static
