@@ -10,10 +10,13 @@
     <canvas id="matrixCanvas"></canvas>
     <div id="computer">
         <div id="screen">
-            <div id="text"></div>
-            <input type="text" id="inputField" autofocus>
+            <div id="textContainer">
+                <span id="cursor">█</span> <!-- Breiter Cursor -->
+                <span id="matrixText"></span>
+            </div>
         </div>
     </div>
     <script type="module" src="wasm_pack_init.js"></script>
+    <script src="matrix.js"></script>
 </body>
 </html>
